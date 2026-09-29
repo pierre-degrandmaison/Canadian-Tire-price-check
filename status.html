@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Price Monitor – Status</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    background: #f7f8fa;
+    color: #1f2328;
+    padding: 32px 16px;
+  }
+  .container { max-width: 900px; margin: 0 auto; }
+  h1 { font-size: 1.4rem; font-weight: 600; margin-bottom: 4px; }
+  .meta { color: #57606a; font-size: 0.85rem; margin-bottom: 24px; }
+  .summary {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    margin-bottom: 28px;
+    font-size: 0.95rem;
+  }
+  .summary-ok      { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
+  .summary-changed { background: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
+  h2 { font-size: 1rem; font-weight: 600; margin-bottom: 10px; color: #1f2328; }
+  section { margin-bottom: 36px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  thead th {
+    background: #f0f2f5;
+    text-align: left;
+    padding: 10px 14px;
+    font-weight: 600;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #57606a;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  tbody td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #f0f2f5;
+    vertical-align: middle;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr.changed { background: #fffbeb; }
+  tbody tr.ok:hover, tbody tr.changed:hover { background: #f7f8fa; }
+  .price { font-variant-numeric: tabular-nums; font-weight: 600; }
+  .prev-price { color: #57606a; text-decoration: line-through; font-weight: 400; }
+  a { color: #3b82d4; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+  .badge-ok      { background: #d1fae5; color: #065f46; }
+  .badge-changed { background: #fef3c7; color: #92400e; }
+  .direction { font-size: 1.1rem; font-weight: 700; text-align: center; }
+  .direction.up   { color: #dc2626; }
+  .direction.down { color: #16a34a; }
+  .ts { color: #57606a; white-space: nowrap; font-size: 0.82rem; }
+  .empty { color: #57606a; font-style: italic; text-align: center; padding: 20px; }
+  footer {
+    margin-top: 40px;
+    padding-top: 16px;
+    border-top: 1px solid #e5e7eb;
+    text-align: center;
+    font-size: 0.78rem;
+    color: #57606a;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Price Monitor</h1>
+  <p class="meta">Last checked: <strong>2026-09-29 14:48 UTC</strong> &nbsp;·&nbsp; Next run: daily at 08:00 UTC</p>
+  <div class="summary summary-ok">All prices unchanged</div>
+
+  <section>
+    <h2>Watched Items</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>URL</th>
+          <th>Current Price</th>
+          <th>Previous Price</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="ok">
+          <td><a href="https://www.canadiantire.ca/en/pdp/pwr-pod-20v-multi-pack-dual-port-charger-0547567p.html" target="_blank" rel="noopener">https://www.canadiantire.ca/en/pdp/pwr-pod-20v-multi-pack-du…</a></td>
+          <td class="price">$79.99</td>
+          <td class="price">—</td>
+          <td><span class="badge badge-ok">OK</span></td>
+        </tr>
+        <tr class="ok">
+          <td><a href="https://www.canadiantire.ca/en/pdp/pwr-pod-20v-battery-fast-charger-90w-0547565p.html" target="_blank" rel="noopener">https://www.canadiantire.ca/en/pdp/pwr-pod-20v-battery-fast-…</a></td>
+          <td class="price">$64.99</td>
+          <td class="price">—</td>
+          <td><span class="badge badge-ok">OK</span></td>
+        </tr>
+        <tr class="ok">
+          <td><a href="https://www.canadiantire.ca/en/pdp/pwr-pod-20v-150w-fast-charger-0547570p.html" target="_blank" rel="noopener">https://www.canadiantire.ca/en/pdp/pwr-pod-20v-150w-fast-cha…</a></td>
+          <td class="price">$69.99</td>
+          <td class="price">—</td>
+          <td><span class="badge badge-ok">OK</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Change History</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Timestamp</th>
+          <th>URL</th>
+          <th>Old Price</th>
+          <th>New Price</th>
+          <th style="text-align:center">Dir</th>
+        </tr>
+      </thead>
+      <tbody><tr><td colspan="5" class="empty">No changes recorded yet.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <footer>Price Monitor &nbsp;·&nbsp; Report generated 2026-09-29 14:48 UTC</footer>
+</div>
+</body>
+</html>
